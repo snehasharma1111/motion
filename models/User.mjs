@@ -1,9 +1,5 @@
 import mongoose from "mongoose";
-
-export const USER_ROLES = {
-	ADMIN: "admin",
-	USER: "user",
-};
+import { USER_ROLES } from "../constants/enum";
 
 const UserSchema = new mongoose.Schema(
 	{
