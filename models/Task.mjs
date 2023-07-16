@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { TASK_STATUS } from "../constants/enum";
+import { TASK_STATUS } from "../constants/enum.mjs";
 
 const TaskSchema = new mongoose.Schema(
 	{

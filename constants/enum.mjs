@@ -8,3 +8,9 @@ export const TASK_STATUS = {
 	PROGRESS: "progress",
 	DONE: "done",
 };
+
+export const RESPONSE_MESSAGES = {
+	SUCCESS: "Success",
+	FAILED: "Failed",
+	SERVER_ERROR: "Internal Server Error",
+};
