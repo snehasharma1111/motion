@@ -52,9 +52,9 @@ const Status = ({ id, dropdown = false, onSelect, className = "" }) => {
 									key={status}
 									onClick={() => {
 										if (onSelect) onSelect(status);
+										setShowDropdown(false);
 									}}
 								>
-									<span className={classes("-dot")} />
 									<Typography type="body" variant="medium">
 										{getStatusLabel(status)}
 									</Typography>

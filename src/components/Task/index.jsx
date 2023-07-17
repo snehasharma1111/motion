@@ -1,42 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import Typography from "../../library/Typography";
 import Avatar from "../Avatar";
 import styles from "./styles.module.scss";
 import { stylesConfig } from "../../utils";
 import Status from "../Status";
+import { toast } from "react-hot-toast";
+import { patchTask } from "../../utils/api/tasks";
 
 const classes = stylesConfig(styles, "task");
 
-const Task = ({ title, description, dueDate, status, assignee }) => {
+const Task = (props) => {
+	const [task, setTask] = useState({
+		_id: props?._id,
+		title: props?.title,
+		description: props?.description,
+		dueDate: props?.dueDate,
+		status: props?.status,
+		assignee: props?.assignee,
+	});
+
+	const updateTask = async (body) => {
+		try {
+			const res = await patchTask(task._id, body);
+			setTask((prev) => ({
+				...prev,
+				...res.data,
+			}));
+		} catch (error) {
+			console.error(error);
+			toast.error(error.message ?? "Something went wrong");
+		}
+	};
+
 	return (
 		<div className={classes("")}>
 			<div className={classes("-header")}>
 				<Typography type="heading" variant="title-2">
-					{title}
+					{task.title}
 				</Typography>
 				<Status
-					id={status}
+					id={task.status}
 					dropdown
 					onSelect={(status) => {
-						alert(status);
+						updateTask({
+							status: status,
+						});
 					}}
 				/>
 			</div>
-			{description ? (
-				<div className={classes("-body")}>{description}</div>
+			{task.description ? (
+				<div className={classes("-body")}>{task.description}</div>
 			) : null}
 			<div className={classes("-footer")}>
 				<div className={classes("-assignee")}>
 					<Avatar
-						src={assignee.avatar}
-						alt={assignee.name}
+						src={task.assignee.avatar}
+						alt={task.assignee.name}
 						size={24}
 					/>
 					<Typography type="body" variant="medium">
-						{assignee.name}
+						{task.assignee.name}
 					</Typography>
 				</div>
-				<div className={classes("-date")}>{dueDate}</div>
+				<div className={classes("-date")}>{task.dueDate}</div>
 			</div>
 		</div>
 	);
