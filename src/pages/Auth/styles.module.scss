@@ -1,0 +1,31 @@
+.auth {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 36px;
+
+    &-logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 16px;
+        width: 96px;
+        height: 96px;
+        object-fit: cover;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    &-form {
+        width: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+        gap: 24px;
+    }
+}

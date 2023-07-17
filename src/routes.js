@@ -2,6 +2,8 @@ import React from "react";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Home from "./pages/Home";
+import Signup from "./pages/Auth/signup";
+import Login from "./pages/Auth/login";
 import NotFound from "./pages/NotFound";
 
 const protectedRoutes = [
@@ -15,6 +17,14 @@ const nonProtectedRoutes = [
 	{
 		path: "/",
 		component: <Home />,
+	},
+	{
+		path: "/login",
+		component: <Login />,
+	},
+	{
+		path: "/signup",
+		component: <Signup />,
 	},
 	{
 		path: "*",
