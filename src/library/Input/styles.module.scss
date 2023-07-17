@@ -1,0 +1,52 @@
+@import "../../sass/mixins";
+@import "../../sass/typography";
+
+.input {
+    all: unset;
+    box-sizing: border-box;
+    @include typography(body, md);
+    color: var(--color-brand-black);
+    border: 1px solid transparent;
+    border-color: #afafaf;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    flex: 0 0 auto;
+    padding: 6px 12px;
+
+    &:focus {
+        border-color: #3d3d3d;
+    }
+
+    &__container {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-flow: column;
+        gap: 6px;
+
+        label:has(~ input:required),
+        label:has(~ select:required),
+        label:has(~ textarea:required) {
+            &::after {
+                content: "*";
+                color: #f00;
+                margin-left: 5px;
+            }
+        }
+    }
+
+    &__label {
+        @include typography(body, md);
+    }
+
+    &--error {
+        color: var(--color-brand-error);
+        border-bottom-color: var(--color-brand-error);
+    }
+
+    &--disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+}
