@@ -16,11 +16,11 @@ export const register = async (req, res) => {
 	try {
 		let user = await User.findOne({ email });
 		if (user)
-			return res.status(400).json({ message: "Email already in use" });
+			return res.status(409).json({ message: "Email already in use" });
 		user = await User.findOne({ username });
 		if (user)
 			return res
-				.status(400)
+				.status(409)
 				.json({ message: "This username has been taken" });
 		user = new User({ name, email, password, username, avatar });
 		user.password = await bcrypt.hash(password, 10);
@@ -79,7 +79,7 @@ export const login = async (req, res) => {
 export const verifyUser = async (req, res) => {
 	try {
 		const user = await User.findById(req.user.id).select("-password");
-		return res.json({ user: user, message: "User Verified" });
+		return res.json({ user: user, message: RESPONSE_MESSAGES.SUCCESS });
 	} catch (error) {
 		console.error(error);
 		return res

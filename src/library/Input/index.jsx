@@ -4,7 +4,7 @@ import { stylesConfig } from "../../utils";
 
 const classNames = stylesConfig(styles);
 
-export const Input = ({ error, errorMessage, className, ...props }) => {
+export const Input = ({ error, errorMessage, className = "", ...props }) => {
 	return (
 		<div className={classNames("input__container")}>
 			{props.label ? (

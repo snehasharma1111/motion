@@ -21,11 +21,23 @@
     }
 
     &-form {
-        width: 400px;
+        width: min(100vw, 500px);
         display: flex;
         justify-content: center;
         align-items: center;
         flex-flow: column;
         gap: 24px;
+
+        &-group {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+
+            &>* {
+                width: 50%;
+            }
+        }
     }
 }

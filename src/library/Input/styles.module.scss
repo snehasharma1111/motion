@@ -40,9 +40,10 @@
         @include typography(body, md);
     }
 
-    &--error {
+    &--error,
+    &--error:focus {
         color: var(--color-brand-error);
-        border-bottom-color: var(--color-brand-error);
+        border-color: var(--color-brand-error);
     }
 
     &--disabled {

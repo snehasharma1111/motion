@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { stylesConfig } from "../../utils";
 import styles from "./styles.module.scss";
 import { logo } from "../../vectors";
@@ -7,11 +7,16 @@ import Input from "../../library/Input";
 import Button from "../../library/Button";
 import { FiLogIn } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { login } from "../../utils/api/auth";
+import GlobalContext from "../../context/GlobalContext";
 
 const classes = stylesConfig(styles, "auth");
 
 const Login = () => {
 	const navigate = useNavigate();
+	const { setUser, loggedIn, setLoggedIn } = useContext(GlobalContext);
+	const [loading, setLoading] = useState(false);
 	const [inputCred, setInputCred] = useState({
 		username: "",
 		password: "",
@@ -25,10 +30,26 @@ const Login = () => {
 		}));
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e?.preventDefault();
-		console.log(inputCred);
+		try {
+			setLoading(true);
+			const res = await login(inputCred);
+			setUser(res.user);
+			setLoggedIn(true);
+			localStorage.setItem("token", res.token);
+			navigate("/dashboard");
+		} catch (error) {
+			console.error();
+			toast.error(error.message ?? "Something went wrong");
+		} finally {
+			setLoading(false);
+		}
 	};
+
+	useEffect(() => {
+		if (loggedIn) navigate("/dashboard");
+	}, [loggedIn]);
 
 	return (
 		<main className={classes("")}>
@@ -74,6 +95,7 @@ const Login = () => {
 					style={{
 						width: "100%",
 					}}
+					loading={loading}
 					type="submit"
 					variant="filled"
 					size="medium"

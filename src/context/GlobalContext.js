@@ -1,10 +1,10 @@
 import { createContext } from "react";
 
 const GlobalContext = createContext({
-	breakpoint: () => {},
-	isAuthenticated: "",
-	setIsAuthenticated: () => {},
-	axiosInstance: undefined,
+	loggedIn: "",
+	setLoggedIn: () => {},
+	user: {},
+	setUser: () => {},
 });
 
 export default GlobalContext;
