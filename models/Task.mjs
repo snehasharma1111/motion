@@ -23,12 +23,12 @@ const TaskSchema = new mongoose.Schema(
 		},
 		createdBy: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "User",
+			ref: "user",
 			required: true,
 		},
 		assignee: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "User",
+			ref: "user",
 		},
 	},
 	{

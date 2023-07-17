@@ -17,7 +17,7 @@ const isAdmin = async (req, res, next) => {
 			return res.status(401).json({ message: "Not authorized" });
 		}
 		req.user = decoded.user;
-		return next(req, res);
+		return next();
 	} catch (error) {
 		return res.status(401).json({ message: "Token is not valid" });
 	}

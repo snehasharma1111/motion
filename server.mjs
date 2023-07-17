@@ -3,10 +3,10 @@ import cors from "cors";
 import { config } from "dotenv";
 import { PORT } from "./config/index.mjs";
 
-import apiIndex from "./routes/index.mjs";
-import apiTasks from "./routes/tasks.mjs";
-import apiAuth from "./routes/auth.mjs";
 import connect from "./db/index.mjs";
+import apiIndex from "./routes/index.mjs";
+import apiAuth from "./routes/auth.mjs";
+import apiTasks from "./routes/tasks.mjs";
 
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";

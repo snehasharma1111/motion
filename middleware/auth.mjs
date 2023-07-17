@@ -1,19 +1,20 @@
 import jwt from "jsonwebtoken";
-import { jwtSecret } from "../config";
+import { jwtSecret } from "../config/index.mjs";
 
-const authMiddleware = (next) => (req, res) => {
+const authMiddleware = (req, res, next) => {
 	// get x-auth-token from header
-	const token = req.headers["x-auth-token"] + "";
-	if (!token) {
-		return res
-			.status(401)
-			.json({ message: "No token, authorization denied" });
-	}
 	try {
+		const token = req.headers["x-auth-token"] + "";
+		if (!token) {
+			return res
+				.status(401)
+				.json({ message: "No token, authorization denied" });
+		}
 		const decoded = jwt.verify(token, jwtSecret);
 		req.user = decoded.user;
-		return next(req, res);
+		return next();
 	} catch (err) {
+		console.error(err);
 		return res.status(401).json({ message: "Token is not valid" });
 	}
 };
