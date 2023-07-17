@@ -1,6 +1,11 @@
 $colors: "blue", "red", "yellow", "green", "white", "black", "purple", "indigo",
 	"orange", "grey", "brown";
 
+$color-heading-black: #252a31;
+$color-body-black: #252a31;
+$color-heading-white: #fff;
+$color-body-white: #fff;
+
 $bgcolor: #f0f0f0;
 $bgcolor-400: #d2d2d2;
 $bgcolor-100: #e1e1e1;
@@ -111,6 +116,7 @@ $green: #34a853;
 :root,
 :root::before,
 :root::after {
+
 	--red: #f44336;
 	--red-100: #ffcdd2;
 	--red-400: #ef5350;
@@ -202,4 +208,14 @@ $green: #34a853;
 	--color-selection: #b7cbe4;
 	--color-text: #4e4e4e;
 	--color-text-heading: #212121;
+	--color-text-black: #252a31;
+	--color-text-white: #fff;
+
+	--color-brand-white: #f5f7fa;
+	--color-brand-black: #1a1a1a;
+	--color-brand-error: #b50000;
+	--color-brand-secondary: #4b4b4b;
+	--color-brand-alice-blue: var(--color-brand-white);
+	--color-brand-nero: var(--color-brand-black);
+
 }

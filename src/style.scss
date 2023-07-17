@@ -5,19 +5,20 @@
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
-    transition: all 0.2s ease-in-out;
+    transition: all var(--transition-time) ease-in-out;
 }
 
 @import "./sass/shadows";
 @import "./sass/colors";
 @import "./sass/presets";
-@import "./sass/theme";
 
 :root,
 :root::before,
 :root::after {
     --transition-time: 200ms;
     --head-height: 60px;
+    --font-red-hat-display: 'Red Hat Display', Poppins, sans-serif;
+    --font-red-hat-text: 'Red Hat Text', Poppins, sans-serif;
 
     --blue: #4285f4;
     --red: #ea4335;
@@ -30,23 +31,10 @@
 @import "./sass/variables";
 @import "./sass/typography";
 
-html {
-    font-size: 16px;
-
-    @include responsive(tablet) {
-        font-size: 14px;
-    }
-
-    @include responsive(mobile) {
-        font-size: 12px;
-    }
-}
-
 body {
-    font-family: var(--font-google-sans);
+    font-family: var(--font-red-hat-text);
     background-color: var(--bgcolor);
     color: var(--tcolor);
-    transition: all var(--transition-time) ease-in-out;
     overflow-x: hidden;
     position: relative;
 }
@@ -55,67 +43,24 @@ svg {
     overflow: visible;
 }
 
-a,
-button,
-input,
-textarea,
-select {
-    all: unset;
-}
-
 a {
-    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
 }
 
-button {
-    all: unset;
-    cursor: pointer;
-    user-select: none;
-}
-
-input,
-textarea,
-select {
-    &::placeholder {
-        user-select: none;
-    }
-
-    &:-webkit-autofill {
-        background-color: rgba(0, 0, 0, 0.01);
-        box-shadow: inset;
-    }
-}
-
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    background-color: rgba(0, 0, 0, 0.01);
-    border: 4px solid transparent;
-
-    &-track {
-        background-color: rgba(0, 0, 0, 0.2);
-    }
+*::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background: #dedede;
 
     &-thumb {
-        background-color: rgba(0, 153, 255, 0.75);
         border-radius: 500px;
-
-        &:hover {
-            background-color: rgba(0, 153, 255, 1);
-        }
-
-        &:hover {
-            background-color: rgba(0, 153, 255, 0.5);
-        }
+        background: #b2b2b2;
     }
-}
 
-.material-symbols-outlined {
-    user-select: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    &-track {
+        background: transparent;
+    }
 }
 
 ::selection {

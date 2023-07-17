@@ -2,9 +2,6 @@ import axios from "axios";
 import { useState } from "react";
 
 export const useContextData = () => {
-	// Loading State
-	const [isLoading, setIsLoading] = useState(false);
-
 	// Global Authentication State
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -33,8 +30,6 @@ export const useContextData = () => {
 
 	return {
 		breakpoint,
-		isLoading,
-		setIsLoading,
 		isAuthenticated,
 		setIsAuthenticated,
 		axiosInstance,
