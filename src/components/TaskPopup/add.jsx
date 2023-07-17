@@ -1,14 +1,11 @@
 import React from "react";
-import styles from "./styles.module.scss";
-import { stylesConfig } from "../../utils";
 import Popup from "../../library/Popup";
+import AddTaskForm from "./new";
 
-const classes = stylesConfig(styles, "dashboard");
-
-const TaskPopup = ({ onClose }) => {
+const TaskPopup = ({ category = "new", onSave, onClose }) => {
 	return (
-		<Popup onClose={onClose} title="Create Task">
-			<form className={classes("-form")}></form>
+		<Popup onClose={onClose} title="Create Task" width="60%" height="80%">
+			{category === "new" ? <AddTaskForm onSave={onSave} /> : null}
 		</Popup>
 	);
 };

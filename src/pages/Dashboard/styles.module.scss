@@ -4,6 +4,21 @@
     width: 100vw;
     position: relative;
 
+    &-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px;
+
+        img {
+            width: 64px;
+            height: 64px;
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+
     &-fab {
         @include init-button();
         position: fixed;

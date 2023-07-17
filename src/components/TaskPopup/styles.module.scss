@@ -1,0 +1,49 @@
+.task-popup-form {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: column;
+    gap: 32px;
+
+    &-body {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 300px;
+        gap: 32px;
+
+        &>* {
+            height: 100%;
+        }
+    }
+
+    &-right {
+        width: 40%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-flow: column;
+
+        &-pane {
+            width: 100%;
+            height: 100%;
+            flex: 0 1 auto;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-flow: column;
+            padding-top: 32px;
+        }
+    }
+
+    &-assignee {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+    }
+}
