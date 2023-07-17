@@ -1,4 +1,6 @@
-const validateEmail = (req, res, next) => {
+import regex from "../constants/regex.mjs";
+
+export const validateEmail = (req, res, next) => {
 	try {
 		const { email } = req.body;
 		if (!email)
@@ -20,6 +22,10 @@ const validateEmail = (req, res, next) => {
 				message:
 					"Email should not contain any newlines or carriage returns",
 			});
+		if (!regex.email.test(email))
+			return res.status(400).json({
+				message: "Invalid Email",
+			});
 		next();
 	} catch (error) {
 		console.error(error);
@@ -27,7 +33,7 @@ const validateEmail = (req, res, next) => {
 	}
 };
 
-const validatePassword = (req, res, next) => {
+export const validatePassword = (req, res, next) => {
 	try {
 		const { password } = req.body;
 		if (!password)
@@ -84,7 +90,7 @@ const validatePassword = (req, res, next) => {
 	}
 };
 
-const validatePhone = (req, res, next) => {
+export const validatePhone = (req, res, next) => {
 	try {
 		const { phone } = req.body;
 		if (!phone)
@@ -108,5 +114,3 @@ const validatePhone = (req, res, next) => {
 		return res.status(500).json({ message: "Internal Server Error" });
 	}
 };
-
-export { validateEmail, validatePassword, validatePhone };

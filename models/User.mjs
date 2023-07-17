@@ -28,20 +28,12 @@ const UserSchema = new mongoose.Schema(
 		role: {
 			type: String,
 			enum: Object.values(USER_ROLES),
-			default: USER_ROLES.STUDENT,
+			default: USER_ROLES.USER,
 		},
 		avatar: {
 			type: String,
 			default:
 				"https://raw.githubusercontent.com/snehasharma1111/planner/master/src/images/user.svg",
-		},
-		phone: {
-			type: String,
-			required: false,
-		},
-		bio: {
-			type: String,
-			required: false,
 		},
 	},
 	{ timestamps: true }
