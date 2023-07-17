@@ -27,13 +27,10 @@ app.use("/api/auth", apiAuth);
 app.use("/api/admin/tasks", apiAdmin);
 app.use("/api/tasks", apiTasks);
 
-// eslint-disable-next-line no-undef
-if (process.env.NODE_ENV === "production") {
-	app.use(express.static("build"));
-	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "build", "index.html"));
-	});
-} // Serve the build files if the app is in production mode
+app.use(express.static("build"));
+app.get("/", (req, res) => {
+	res.sendFile(path.resolve(__dirname, "build", "index.html"));
+});
 
 app.listen(PORT, () => {
 	connect();
