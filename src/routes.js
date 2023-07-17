@@ -1,6 +1,6 @@
 import React from "react";
 import PrivateRoute from "./components/PrivateRoute";
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Signup from "./pages/Auth/signup";
 import Login from "./pages/Auth/login";

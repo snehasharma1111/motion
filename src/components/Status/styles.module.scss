@@ -1,0 +1,57 @@
+.status {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 500px;
+    gap: 8px;
+    position: relative;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+
+    &-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 500px;
+        backdrop-filter: blur(10px);
+    }
+
+    &--pending {
+        background-color: rgb(241, 241, 239);
+        color: var(--grey-700);
+    }
+
+    &--progress {
+        background-color: var(--blue-100);
+        color: var(--blue-700);
+    }
+
+    &--done {
+        background-color: var(--green-100);
+        color: var(--green-700);
+    }
+
+    &-dropdown {
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: var(--color-brand-white);
+        box-shadow: var(--shadow-elevation-2dp);
+        border-radius: 4px;
+    }
+
+    &-option {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 6px 12px;
+        white-space: nowrap;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+    }
+}

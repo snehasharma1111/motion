@@ -1,0 +1,46 @@
+import React from "react";
+import styles from "./styles.module.scss";
+import { stylesConfig } from "../../utils";
+
+const Avatar = ({ size = "medium", src, alt, className, onClick }) => {
+	const classNames = stylesConfig(styles);
+	const getAvatarSize = () => {
+		switch (size) {
+			case "small":
+				return 30;
+			case "medium":
+				return 50;
+			case "large":
+				return 100;
+			default:
+				return typeof size === "number" ? size : 50;
+		}
+	};
+
+	return (
+		<div
+			className={classNames("avatar", className)}
+			onClick={onClick}
+			style={{
+				width: getAvatarSize(),
+				height: getAvatarSize(),
+			}}
+		>
+			{src ? (
+				<img
+					src={src}
+					alt={alt + ""}
+					width={getAvatarSize()}
+					height={getAvatarSize()}
+					className={classNames("avatar-image")}
+				/>
+			) : (
+				<div className={classNames("avatar-placeholder")}>
+					<span>{alt ? alt[0] : "A"}</span>
+				</div>
+			)}
+		</div>
+	);
+};
+
+export default Avatar;

@@ -1,0 +1,38 @@
+.task {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #afafaf;
+    border-radius: 8px;
+
+    &-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &-body {
+        width: 100%;
+    }
+
+    &-footer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-assignee,
+    &-date {
+        width: 50%;
+        height: 48px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}
