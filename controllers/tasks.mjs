@@ -129,14 +129,39 @@ export const updateTask = async (req, res) => {
 				select: "name email avatar",
 			})
 			.select("title description dueDate status");
-		return res.status(200).json({
+		return res.status(202).json({
 			message: RESPONSE_MESSAGES.SUCCESS,
 			data: updatedTask,
 		});
 	} catch (error) {
-		console.error(error, error.kind);
+		console.error(error);
 		if (error.kind === "ObjectId")
 			return res.status(404).json({ message: "Not found" });
+		return res.status(500).json({
+			message: RESPONSE_MESSAGES.SERVER_ERROR,
+		});
+	}
+};
+
+export const deleteTask = async (req, res) => {
+	try {
+		const task = await Task.findById(req.params.id)
+			.populate({
+				path: "createdBy assignee",
+				select: "name email avatar",
+			})
+			.select("title description dueDate status");
+		if (!task) return res.status(404).json({ message: "Task Not found" });
+		if (task.createdBy._id.toString() !== req.user.id)
+			return res.status(401).json({ message: RESPONSE_MESSAGES.FAILED });
+		await task.remove();
+		return res
+			.status(204)
+			.json({ message: RESPONSE_MESSAGES.SUCCESS, data: task });
+	} catch (error) {
+		console.error(error);
+		if (error.kind === "ObjectId")
+			return res.status(404).json({ message: "Task Not found" });
 		return res.status(500).json({
 			message: RESPONSE_MESSAGES.SERVER_ERROR,
 		});
