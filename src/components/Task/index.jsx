@@ -6,6 +6,8 @@ import { stylesConfig } from "../../utils";
 import Status from "../Status";
 import { toast } from "react-hot-toast";
 import { patchTask } from "../../utils/api/tasks";
+import { AiOutlineEdit } from "react-icons/ai";
+import AllUsers from "../AllUsers";
 
 const classes = stylesConfig(styles, "task");
 
@@ -38,29 +40,34 @@ const Task = (props) => {
 				<Typography type="heading" variant="title-2">
 					{task.title}
 				</Typography>
-				<Status
-					id={task.status}
-					dropdown
-					onSelect={(status) => {
-						updateTask({
-							status: status,
-						});
-					}}
-				/>
+				<div className={classes("-actions")}>
+					<button className={classes("-actions-btn")}>
+						<AiOutlineEdit />
+					</button>
+					<Status
+						id={task.status}
+						dropdown
+						onSelect={(status) => {
+							updateTask({
+								status: status,
+							});
+						}}
+					/>
+				</div>
 			</div>
 			{task.description ? (
 				<div className={classes("-body")}>{task.description}</div>
 			) : null}
 			<div className={classes("-footer")}>
 				<div className={classes("-assignee")}>
-					<Avatar
-						src={task.assignee.avatar}
-						alt={task.assignee.name}
-						size={24}
+					<AllUsers
+						currentUser={task.assignee}
+						onSelect={(user) => {
+							updateTask({
+								assignee: user._id,
+							});
+						}}
 					/>
-					<Typography type="body" variant="medium">
-						{task.assignee.name}
-					</Typography>
 				</div>
 				<div className={classes("-date")}>{task.dueDate}</div>
 			</div>

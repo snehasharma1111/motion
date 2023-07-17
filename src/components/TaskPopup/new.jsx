@@ -9,6 +9,8 @@ import { toast } from "react-hot-toast";
 import { postTask } from "../../utils/api/tasks";
 import Avatar from "../Avatar";
 import Typography from "../../library/Typography";
+import AllUsers from "../AllUsers";
+import Status from "../Status";
 
 const classes = stylesConfig(styles, "task-popup-form");
 
@@ -54,6 +56,7 @@ const AddTaskForm = ({ onSave }) => {
 				name="title"
 				id="new-task-title"
 				required
+				errorMessage="Please enter title"
 				value={fields.title}
 				onChange={handleChange}
 				style={{
@@ -75,16 +78,36 @@ const AddTaskForm = ({ onSave }) => {
 				/>
 				<div className={classes("-right")}>
 					<div className={classes("-right-pane")}>
-						<div className={classes("-assignee")}>
-							<Avatar
-								src={fields.assignee.avatar}
-								alt={fields.assignee.name}
-								size={24}
-							/>
-							<Typography type="body" variant="medium">
-								{fields.assignee.name}
-							</Typography>
-						</div>
+						<Status
+							id={fields.status}
+							dropdown
+							onSelect={(selectedStatus) => {
+								setFields((prev) => ({
+									...prev,
+									status: selectedStatus,
+								}));
+							}}
+						/>
+						<Typography type="body" variant="small">
+							Assign to
+						</Typography>
+						<AllUsers
+							currentUser={fields.assignee}
+							setCurrentUser={(selectedUser) => {
+								setFields((prev) => ({
+									...prev,
+									assignee: selectedUser,
+								}));
+							}}
+						/>
+						<Input
+							placeholder="Due Date"
+							label="Due Date"
+							name="dueDate"
+							type="date"
+							value={fields.dueDate}
+							onChange={handleChange}
+						/>
 					</div>
 					<Button
 						icon={<AiOutlineSave />}

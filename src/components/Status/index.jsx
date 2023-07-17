@@ -42,6 +42,7 @@ const Status = ({ id, dropdown = false, onSelect, className = "" }) => {
 					<AiOutlineCaretDown
 						style={{
 							fontSize: "12px",
+							marginLeft: "auto",
 						}}
 					/>
 					{showDropdown ? (

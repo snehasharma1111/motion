@@ -1,3 +1,5 @@
+@import '../../sass/mixins';
+
 .task {
     width: 100%;
     display: flex;
@@ -5,15 +7,22 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 12px;
-    padding: 12px;
-    border: 1px solid #afafaf;
-    border-radius: 8px;
+    padding: 12px;                                                                                                                                                                                                   
 
     &-header {
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    &-actions {
+        &-btn {
+            @include init-button();
+            padding: 16px;
+            background-color: rgba(255, 255, 255, 0.25);
+            border-radius: 500px;
+        }
     }
 
     &-body {

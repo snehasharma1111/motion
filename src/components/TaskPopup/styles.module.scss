@@ -35,7 +35,12 @@
             justify-content: flex-start;
             align-items: center;
             flex-flow: column;
-            padding-top: 32px;
+            gap: 8px;
+            padding-top: 27px;
+
+            &>* {
+                width: 100%;
+            }
         }
     }
 

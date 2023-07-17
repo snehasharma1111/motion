@@ -6,6 +6,7 @@ import { PORT } from "./config/index.mjs";
 import connect from "./db/index.mjs";
 import apiIndex from "./routes/index.mjs";
 import apiAuth from "./routes/auth.mjs";
+import apiUsers from "./routes/users.mjs";
 import apiAdmin from "./routes/admin.mjs";
 import apiTasks from "./routes/tasks.mjs";
 
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api", apiIndex);
 app.use("/api/auth", apiAuth);
+app.use("/api/users", apiUsers);
 app.use("/api/admin/tasks", apiAdmin);
 app.use("/api/tasks", apiTasks);
 

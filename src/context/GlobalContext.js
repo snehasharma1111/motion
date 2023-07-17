@@ -6,6 +6,8 @@ const GlobalContext = createContext({
 	user: {},
 	setUser: () => {},
 	logout: () => {},
+	allUsers: [],
+	setAllUsers: () => {},
 });
 
 export default GlobalContext;

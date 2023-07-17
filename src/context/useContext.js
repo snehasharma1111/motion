@@ -5,6 +5,8 @@ export const useContextData = () => {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [user, setUser] = useState(null);
 
+	const [allUsers, setAllUsers] = useState([]);
+
 	const logout = () => {
 		setLoggedIn(false);
 		localStorage.removeItem("token");
@@ -16,5 +18,7 @@ export const useContextData = () => {
 		user,
 		setUser,
 		logout,
+		allUsers,
+		setAllUsers,
 	};
 };

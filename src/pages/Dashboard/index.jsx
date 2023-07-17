@@ -7,11 +7,12 @@ import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import styles from "./styles.module.scss";
 import { stylesConfig } from "../../utils";
 import { FiLogOut } from "react-icons/fi";
-import TaskPopup from "../../components/TaskPopup/add.jsx";
+import TaskPopup from "../../components/TaskPopup";
 import Button from "../../library/Button/index.jsx";
 import GlobalContext from "../../context/GlobalContext.js";
 import { logo } from "../../vectors/index.js";
 import { useNavigate } from "react-router-dom";
+import Typography from "../../library/Typography/index.jsx";
 
 const classes = stylesConfig(styles, "dashboard");
 
@@ -52,11 +53,19 @@ const Dashboard = () => {
 						Logout
 					</Button>
 				</header>
-				<Masonry xlg={4} lg={3} md={2} sm={1}>
-					{tasks.map((task) => (
-						<Task {...task} key={task._id} />
-					))}
-				</Masonry>
+				{tasks.length > 0 ? (
+					<Masonry xlg={4} lg={3} md={2} sm={1}>
+						{tasks.map((task) => (
+							<Task {...task} key={task._id} />
+						))}
+					</Masonry>
+				) : (
+					<div className={classes("-empty")}>
+						<Typography type="heading" variant="display">
+							No Tasks Yet
+						</Typography>
+					</div>
+				)}
 				<button
 					className={classes("-fab")}
 					onClick={() => {
