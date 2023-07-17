@@ -5,7 +5,7 @@ import { createUpdateTask } from "../validations/tasks.mjs";
 
 export const getAllTasks = async (req, res) => {
 	try {
-		const tasks = await Task.find({ createdBy: req.user.id })
+		const tasks = await Task.find()
 			.sort({
 				dueDate: -1,
 			})
@@ -34,11 +34,6 @@ export const getTask = async (req, res) => {
 			})
 			.select("title description dueDate status createdBy assignee");
 		if (!task) return res.status(404).json({ message: "Task not found" });
-		if (
-			task.createdBy._id.toString() !== req.user.id &&
-			task.assignee._id.toString() !== req.user.id
-		)
-			return res.status(401).json({ message: RESPONSE_MESSAGES.FAILED });
 		return res.status(200).json({
 			message: RESPONSE_MESSAGES.SUCCESS,
 			data: task,
@@ -101,8 +96,6 @@ export const updateTask = async (req, res) => {
 		if (Object.keys(req.body).length === 0)
 			return res.status(400).json({ message: RESPONSE_MESSAGES.FAILED });
 		if (!task) return res.status(404).json({ message: "Task not found" });
-		if (task.createdBy.toString() !== req.user.id)
-			return res.status(401).json({ message: RESPONSE_MESSAGES.FAILED });
 		const updatedTaskBody = {};
 		if (req.body.title) updatedTaskBody.title = req.body.title;
 		if (req.body.description)
@@ -152,8 +145,6 @@ export const deleteTask = async (req, res) => {
 			})
 			.select("title description dueDate status");
 		if (!task) return res.status(404).json({ message: "Task Not found" });
-		if (task.createdBy._id.toString() !== req.user.id)
-			return res.status(401).json({ message: RESPONSE_MESSAGES.FAILED });
 		await task.remove();
 		return res
 			.status(204)

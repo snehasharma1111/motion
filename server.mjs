@@ -6,6 +6,7 @@ import { PORT } from "./config/index.mjs";
 import connect from "./db/index.mjs";
 import apiIndex from "./routes/index.mjs";
 import apiAuth from "./routes/auth.mjs";
+import apiAdmin from "./routes/admin.mjs";
 import apiTasks from "./routes/tasks.mjs";
 
 import path, { dirname } from "path";
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api", apiIndex);
 app.use("/api/auth", apiAuth);
+app.use("/api/admin/tasks", apiAdmin);
 app.use("/api/tasks", apiTasks);
 
 // eslint-disable-next-line no-undef
