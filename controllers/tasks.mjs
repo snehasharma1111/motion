@@ -94,3 +94,51 @@ export const createTask = async (req, res) => {
 		});
 	}
 };
+
+export const updateTask = async (req, res) => {
+	try {
+		const task = await Task.findById(req.params.id);
+		if (Object.keys(req.body).length === 0)
+			return res.status(400).json({ message: RESPONSE_MESSAGES.FAILED });
+		if (!task) return res.status(404).json({ message: "Task not found" });
+		if (task.createdBy.toString() !== req.user.id)
+			return res.status(401).json({ message: RESPONSE_MESSAGES.FAILED });
+		const updatedTaskBody = {};
+		if (req.body.title) updatedTaskBody.title = req.body.title;
+		if (req.body.description)
+			updatedTaskBody.description = req.body.description;
+		if (req.body.dueDate) updatedTaskBody.dueDate = req.body.dueDate;
+		if (req.body.status) {
+			if (Object.values(TASK_STATUS).includes(req.body.status))
+				updatedTaskBody.status = req.body.status;
+			else return res.status(400).json({ message: "Invalid status" });
+		}
+		if (req.body.assignee) {
+			const foundAssignee = await User.findById(req.body.assignee);
+			if (!foundAssignee)
+				return res.status(404).json({ message: "User not found" });
+			else updatedTaskBody.assignee = req.body.assignee;
+		}
+		const updatedTask = await Task.findByIdAndUpdate(
+			req.params.id,
+			{ $set: updatedTaskBody },
+			{ new: true }
+		)
+			.populate({
+				path: "createdBy assignee",
+				select: "name email avatar",
+			})
+			.select("title description dueDate status");
+		return res.status(200).json({
+			message: RESPONSE_MESSAGES.SUCCESS,
+			data: updatedTask,
+		});
+	} catch (error) {
+		console.error(error, error.kind);
+		if (error.kind === "ObjectId")
+			return res.status(404).json({ message: "Not found" });
+		return res.status(500).json({
+			message: RESPONSE_MESSAGES.SERVER_ERROR,
+		});
+	}
+};
