@@ -53,7 +53,7 @@ const Signup = () => {
 	};
 
 	useEffect(() => {
-		if (loggedIn) navigate("/dashboard");
+		if (loggedIn) navigate("/tasks");
 	}, [loggedIn]);
 
 	return (

@@ -34,7 +34,7 @@ const Home = () => {
 				icon={<AiOutlineArrowRight />}
 				iconPosition="right"
 				onClick={() => {
-					if (loggedIn) navigate("/dashboard");
+					if (loggedIn) navigate("/tasks");
 					navigate("/login");
 				}}
 			>

@@ -38,7 +38,7 @@ const Login = () => {
 			setUser(res.user);
 			setLoggedIn(true);
 			localStorage.setItem("token", res.token);
-			navigate("/dashboard");
+			navigate("/tasks");
 		} catch (error) {
 			console.error();
 			toast.error(error.message ?? "Something went wrong");
@@ -48,7 +48,7 @@ const Login = () => {
 	};
 
 	useEffect(() => {
-		if (loggedIn) navigate("/dashboard");
+		if (loggedIn) navigate("/tasks");
 	}, [loggedIn]);
 
 	return (

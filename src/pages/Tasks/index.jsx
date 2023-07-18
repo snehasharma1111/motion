@@ -17,7 +17,7 @@ import Avatar from "../../components/Avatar/index.jsx";
 
 const classes = stylesConfig(styles, "dashboard");
 
-const Dashboard = () => {
+const Tasks = () => {
 	const navigate = useNavigate();
 	const { user, logout } = useContext(GlobalContext);
 	const [tasks, setTasks] = useState([]);
@@ -127,4 +127,4 @@ const Dashboard = () => {
 	);
 };
 
-export default Dashboard;
+export default Tasks;
