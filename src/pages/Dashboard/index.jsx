@@ -56,7 +56,15 @@ const Dashboard = () => {
 				{tasks.length > 0 ? (
 					<Masonry xlg={4} lg={3} md={2} sm={1}>
 						{tasks.map((task) => (
-							<Task {...task} key={task._id} />
+							<Task
+								{...task}
+								key={task._id}
+								onRemove={() => {
+									setTasks((prev) =>
+										prev.filter((t) => t._id !== task._id)
+									);
+								}}
+							/>
 						))}
 					</Masonry>
 				) : (

@@ -59,7 +59,7 @@ const Login = () => {
 				className={classes("-logo")}
 				onClick={() => navigate("/")}
 			/>
-			<Typography type="heading" variant="display">
+			<Typography type="heading" variant="display" className={classes("-heading")}>
 				Login to your Motion Account
 			</Typography>
 			<form className={classes("-form")} onSubmit={handleSubmit}>

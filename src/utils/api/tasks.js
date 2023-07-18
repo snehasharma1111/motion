@@ -29,3 +29,13 @@ export const patchTask = async (id, body) => {
 		return Promise.reject(error.response.data);
 	}
 };
+
+export const deleteTask = async (id) => {
+	try {
+		const res = await http.delete(`/tasks/${id}`);
+		return Promise.resolve(res.data);
+	} catch (error) {
+		console.error(error);
+		return Promise.reject(error.response.data);
+	}
+};

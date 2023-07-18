@@ -17,11 +17,11 @@ const BUTTON_VARIANTS = {
 
 export const Button = ({
 	children,
-	className,
+	className = "",
 	size = "medium",
 	variant = "filled",
 	loading = false,
-	icon,
+	icon = null,
 	iconPosition = "left",
 	...props
 }) => {
