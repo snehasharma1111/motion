@@ -10,10 +10,12 @@ import AllUsers from "../AllUsers";
 import { useConfirmationModal } from "../Confirmation";
 import { getStatusLabel } from "../../utils/functions";
 import moment from "moment";
+import TaskPopup from "../TaskPopup";
 
 const classes = stylesConfig(styles, "task");
 
 const Task = (props) => {
+	const [showUpdatePopup, setShowUpdatePopup] = useState(false);
 	const [task, setTask] = useState({
 		_id: props?._id,
 		title: props?.title,
@@ -66,7 +68,10 @@ const Task = (props) => {
 						{task.title}
 					</Typography>
 					<div className={classes("-actions")}>
-						<button className={classes("-actions-btn")}>
+						<button
+							className={classes("-actions-btn")}
+							onClick={() => setShowUpdatePopup(true)}
+						>
 							<AiOutlineEdit />
 						</button>
 						<Status
@@ -102,10 +107,19 @@ const Task = (props) => {
 					<div className={classes("-assignee")}>
 						<AllUsers
 							currentUser={task.assignee}
-							onSelect={(user) => {
-								updateTask({
-									assignee: user._id,
-								});
+							setCurrentUser={(user) => {
+								toast.promise(
+									updateTask({
+										assignee: user._id,
+									}),
+									{
+										loading: `Assigning ${task.title} to ${
+											user.name ?? user.username
+										}`,
+										success: "Updated",
+										error: "Couldn't update assignee",
+									}
+								);
 							}}
 						/>
 					</div>
@@ -117,6 +131,13 @@ const Task = (props) => {
 			{removeTaskConfirmation.showPopup
 				? removeTaskConfirmation.Modal
 				: null}
+			{showUpdatePopup ? (
+				<TaskPopup
+					category={task._id}
+					onSave={(task) => setTask(task)}
+					onClose={() => setShowUpdatePopup(false)}
+				/>
+			) : null}
 		</>
 	);
 };

@@ -39,6 +39,10 @@ const AllUsers = ({ currentUser, setCurrentUser }) => {
 		if (allUsers.length === 0) getAllUsers();
 	}, []);
 
+	useEffect(() => {
+		setActiveUser(currentUser);
+	}, [currentUser]);
+
 	return (
 		<div className={classes("")}>
 			<div
