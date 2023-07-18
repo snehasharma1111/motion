@@ -13,12 +13,13 @@ import GlobalContext from "../../context/GlobalContext.js";
 import { logo } from "../../vectors/index.js";
 import { useNavigate } from "react-router-dom";
 import Typography from "../../library/Typography/index.jsx";
+import Avatar from "../../components/Avatar/index.jsx";
 
 const classes = stylesConfig(styles, "dashboard");
 
 const Dashboard = () => {
 	const navigate = useNavigate();
-	const { logout } = useContext(GlobalContext);
+	const { user, logout } = useContext(GlobalContext);
 	const [tasks, setTasks] = useState([]);
 	const [showAddPopup, setShowAddPopup] = useState(false);
 
@@ -40,7 +41,22 @@ const Dashboard = () => {
 		<>
 			<main className={classes("")}>
 				<header className={classes("-header")}>
-					<img src={logo} alt="logo" onClick={() => navigate("/")} />
+					<img
+						src={logo}
+						alt="logo"
+						className={classes("-header-logo")}
+						onClick={() => navigate("/")}
+					/>
+					<div className={classes("-header-user")}>
+						<Avatar
+							src={user.avatar}
+							alt={user.name ?? user.username}
+							size={32}
+						/>
+						<Typography type="body" variant="large">
+							{user.name ?? user.username}
+						</Typography>
+					</div>
 					<Button
 						variant="outlined"
 						icon={<FiLogOut />}
@@ -55,17 +71,31 @@ const Dashboard = () => {
 				</header>
 				{tasks.length > 0 ? (
 					<Masonry xlg={4} lg={3} md={2} sm={1}>
-						{tasks.map((task) => (
-							<Task
-								{...task}
-								key={task._id}
-								onRemove={() => {
-									setTasks((prev) =>
-										prev.filter((t) => t._id !== task._id)
-									);
-								}}
-							/>
-						))}
+						{tasks.map((task) =>
+							task.createdBy._id === user._id ||
+							task.assignee._id === user._id ? (
+								<Task
+									{...task}
+									key={task._id}
+									onUpdate={(updatedTask) => {
+										setTasks((prev) =>
+											prev.map((t) =>
+												t._id === updatedTask._id
+													? updatedTask
+													: t
+											)
+										);
+									}}
+									onRemove={() => {
+										setTasks((prev) =>
+											prev.filter(
+												(t) => t._id !== task._id
+											)
+										);
+									}}
+								/>
+							) : null
+						)}
 					</Masonry>
 				) : (
 					<div className={classes("-empty")}>

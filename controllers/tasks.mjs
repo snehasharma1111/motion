@@ -5,7 +5,9 @@ import { createUpdateTask } from "../validations/tasks.mjs";
 
 export const getAllTasks = async (req, res) => {
 	try {
-		const tasks = await Task.find({ createdBy: req.user.id })
+		const tasks = await Task.find({
+			$or: [{ createdBy: req.user.id }, { assignee: req.user.id }],
+		})
 			.sort({
 				dueDate: -1,
 			})
@@ -101,7 +103,10 @@ export const updateTask = async (req, res) => {
 		if (Object.keys(req.body).length === 0)
 			return res.status(400).json({ message: RESPONSE_MESSAGES.FAILED });
 		if (!task) return res.status(404).json({ message: "Task not found" });
-		if (task.createdBy.toString() !== req.user.id)
+		if (
+			task.createdBy.toString() !== req.user.id &&
+			task.assignee._id.toString() !== req.user.id
+		)
 			return res.status(401).json({ message: RESPONSE_MESSAGES.FAILED });
 		const updatedTaskBody = {};
 		if (req.body.title) updatedTaskBody.title = req.body.title;

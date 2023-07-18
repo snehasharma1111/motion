@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Typography from "../../library/Typography";
 import styles from "./styles.module.scss";
 import { stylesConfig } from "../../utils";
@@ -11,10 +11,12 @@ import { useConfirmationModal } from "../Confirmation";
 import { getStatusLabel } from "../../utils/functions";
 import moment from "moment";
 import TaskPopup from "../TaskPopup";
+import GlobalContext from "../../context/GlobalContext";
 
 const classes = stylesConfig(styles, "task");
 
 const Task = (props) => {
+	const { user } = useContext(GlobalContext);
 	const [showUpdatePopup, setShowUpdatePopup] = useState(false);
 	const [task, setTask] = useState({
 		_id: props?._id,
@@ -22,6 +24,7 @@ const Task = (props) => {
 		description: props?.description,
 		dueDate: props?.dueDate,
 		status: props?.status,
+		createdBy: props?.createdBy,
 		assignee: props?.assignee,
 	});
 
@@ -32,6 +35,10 @@ const Task = (props) => {
 				...prev,
 				...res.data,
 			}));
+			props.onUpdate({
+				...task,
+				...res.data,
+			});
 		} catch (error) {
 			console.error(error);
 			toast.error(error.message ?? "Something went wrong");
@@ -92,12 +99,16 @@ const Task = (props) => {
 								);
 							}}
 						/>
-						<button
-							className={classes("-actions-btn")}
-							onClick={() => removeTaskConfirmation.openPopup()}
-						>
-							<AiOutlineDelete />
-						</button>
+						{task.createdBy._id === user._id ? (
+							<button
+								className={classes("-actions-btn")}
+								onClick={() =>
+									removeTaskConfirmation.openPopup()
+								}
+							>
+								<AiOutlineDelete />
+							</button>
+						) : null}
 					</div>
 				</div>
 				{task.description ? (
