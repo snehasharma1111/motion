@@ -8,6 +8,8 @@ import { deleteTask, patchTask } from "../../utils/api/tasks";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import AllUsers from "../AllUsers";
 import { useConfirmationModal } from "../Confirmation";
+import { getStatusLabel } from "../../utils/functions";
+import moment from "moment";
 
 const classes = stylesConfig(styles, "task");
 
@@ -47,7 +49,12 @@ const Task = (props) => {
 	const removeTaskConfirmation = useConfirmationModal(
 		`Delete Task ${task.title}`,
 		`Are you sure you want to delete task ${task.title}. This actions can't be undone.`,
-		removeTask,
+		() =>
+			toast.promise(removeTask(), {
+				loading: "Deleting task",
+				success: "Task deleted",
+				error: "An error occured",
+			}),
 		() => {}
 	);
 
@@ -66,9 +73,18 @@ const Task = (props) => {
 							id={task.status}
 							dropdown
 							onSelect={(status) => {
-								updateTask({
-									status: status,
-								});
+								toast.promise(
+									updateTask({
+										status: status,
+									}),
+									{
+										loading: `Marking ${
+											task.title
+										} as ${getStatusLabel(status)}`,
+										success: "Updated",
+										error: "Couldn't update status",
+									}
+								);
 							}}
 						/>
 						<button
@@ -93,7 +109,9 @@ const Task = (props) => {
 							}}
 						/>
 					</div>
-					<div className={classes("-date")}>{task.dueDate}</div>
+					<div className={classes("-date")}>
+						{moment(task.dueDate).format("DD-MM-YYYY")}
+					</div>
 				</div>
 			</div>
 			{removeTaskConfirmation.showPopup

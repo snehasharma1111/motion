@@ -7,7 +7,6 @@ import Button from "../../library/Button";
 import { AiOutlineSave } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { postTask } from "../../utils/api/tasks";
-import Avatar from "../Avatar";
 import Typography from "../../library/Typography";
 import AllUsers from "../AllUsers";
 import Status from "../Status";
@@ -58,6 +57,7 @@ const AddTaskForm = ({ onSave }) => {
 				required
 				errorMessage="Please enter title"
 				value={fields.title}
+				autoFocus
 				onChange={handleChange}
 				style={{
 					width: "100%",
