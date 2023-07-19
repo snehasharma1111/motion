@@ -7,9 +7,14 @@ import Button from "../../library/Button";
 import { AiOutlineLoading3Quarters, AiOutlineSave } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { fetchTask, patchTask } from "../../utils/api/tasks";
+import {
+	fetchTask as fetchTaskAsAdmin,
+	patchTask as patchTaskAsAdmin,
+} from "../../utils/api/admin";
 import Typography from "../../library/Typography";
 import AllUsers from "../AllUsers";
 import Status from "../Status";
+import { USER_ROLES } from "../../constants/enum.mjs";
 
 const classes = stylesConfig(styles, "task-popup-form");
 
@@ -28,7 +33,10 @@ const EditTaskForm = ({ id, onSave }) => {
 	const getTask = async () => {
 		try {
 			setFetching(true);
-			const res = await fetchTask(id);
+			const res =
+				user.role === USER_ROLES.ADMIN
+					? await fetchTaskAsAdmin(id)
+					: await fetchTask(id);
 			setFields(res.data);
 		} catch (error) {
 			console.error(error);
@@ -47,11 +55,19 @@ const EditTaskForm = ({ id, onSave }) => {
 		e?.preventDefault();
 		try {
 			setUpdating(true);
-			const res = await patchTask(id, {
-				...fields,
-				assignee: fields.assignee._id,
-			});
-			toast.success("Added task successfully");
+			const res =
+				user.role === USER_ROLES.ADMIN
+					? await patchTaskAsAdmin(id, {
+							...fields,
+							assignee: fields.assignee._id,
+							// eslint-disable-next-line no-mixed-spaces-and-tabs
+					  })
+					: await patchTask(id, {
+							...fields,
+							assignee: fields.assignee._id,
+							// eslint-disable-next-line no-mixed-spaces-and-tabs
+					  });
+			toast.success("Updated");
 			onSave(res.data);
 		} catch (error) {
 			console.error(error);

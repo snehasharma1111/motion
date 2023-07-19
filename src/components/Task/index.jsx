@@ -12,6 +12,11 @@ import { getStatusLabel } from "../../utils/functions";
 import moment from "moment";
 import TaskPopup from "../TaskPopup";
 import GlobalContext from "../../context/GlobalContext";
+import {
+	patchTask as patchTaskAsAdmin,
+	deleteTask as deleteTaskAsAdmin,
+} from "../../utils/api/admin";
+import { USER_ROLES } from "../../constants/enum.mjs";
 
 const classes = stylesConfig(styles, "task");
 
@@ -30,7 +35,10 @@ const Task = (props) => {
 
 	const updateTask = async (body) => {
 		try {
-			const res = await patchTask(task._id, body);
+			const res =
+				user.role === USER_ROLES.ADMIN
+					? await patchTaskAsAdmin(task._id, body)
+					: await patchTask(task._id, body);
 			setTask((prev) => ({
 				...prev,
 				...res.data,
@@ -47,7 +55,9 @@ const Task = (props) => {
 
 	const removeTask = async () => {
 		try {
-			await deleteTask(task._id);
+			user.role === USER_ROLES.ADMIN
+				? await deleteTaskAsAdmin(task._id)
+				: await deleteTask(task._id);
 			props.onRemove();
 		} catch (error) {
 			console.error(error);
