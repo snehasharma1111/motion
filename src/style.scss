@@ -1,11 +1,11 @@
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    transition: all var(--transition-time) ease-in-out;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+	transition: all var(--transition-time) ease-in-out;
 }
 
 @import "./sass/shadows";
@@ -15,15 +15,15 @@
 :root,
 :root::before,
 :root::after {
-    --transition-time: 200ms;
-    --head-height: 60px;
-    --font-red-hat-display: 'Red Hat Display', Poppins, sans-serif;
-    --font-red-hat-text: 'Red Hat Text', Poppins, sans-serif;
+	--transition-time: 200ms;
+	--head-height: 60px;
+	--font-red-hat-display: "Red Hat Display", Poppins, sans-serif;
+	--font-red-hat-text: "Red Hat Text", Poppins, sans-serif;
 
-    --blue: #4285f4;
-    --red: #ea4335;
-    --yellow: #fbbc05;
-    --green: #34a853;
+	--blue: #4285f4;
+	--red: #ea4335;
+	--yellow: #fbbc05;
+	--green: #34a853;
 }
 
 @import "./sass/mixins";
@@ -32,41 +32,41 @@
 @import "./sass/typography";
 
 body {
-    font-family: var(--font-red-hat-text);
-    background-color: var(--bgcolor);
-    color: var(--tcolor);
-    overflow-x: hidden;
-    position: relative;
+	font-family: var(--font-red-hat-text);
+	background-color: var(--bgcolor);
+	color: var(--tcolor);
+	overflow-x: hidden;
+	position: relative;
 }
 
 svg {
-    overflow: visible;
+	overflow: visible;
 }
 
 a {
-    color: inherit;
+	color: inherit;
 }
 
 *::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    background: #dedede;
+	width: 5px;
+	height: 5px;
+	background: #dedede;
 
-    &-thumb {
-        border-radius: 500px;
-        background: #b2b2b2;
-    }
+	&-thumb {
+		border-radius: 500px;
+		background: #b2b2b2;
+	}
 
-    &-track {
-        background: transparent;
-    }
+	&-track {
+		background: transparent;
+	}
 }
 
 ::selection {
-    background-color: var(--green);
-    color: var(--bgcolor);
+	background-color: var(--green);
+	color: var(--bgcolor);
 }
 
 .dispn {
-    display: none !important;
+	display: none !important;
 }

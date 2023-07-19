@@ -1,70 +1,70 @@
-@import '../../sass/keyframes';
+@import "../../sass/keyframes";
 
 .task-popup-form {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-flow: column;
-    gap: 32px;
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-flow: column;
+	gap: 32px;
 
-    &-body {
-        width: 100%;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        height: 300px;
-        gap: 32px;
+	&-body {
+		width: 100%;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		height: 300px;
+		gap: 32px;
 
-        &>* {
-            height: 100%;
-        }
-    }
+		& > * {
+			height: 100%;
+		}
+	}
 
-    &-loader {
-        width: 100%;
-        height: 48px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+	&-loader {
+		width: 100%;
+		height: 48px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-        svg {
-            width: 24px;
-            height: 24px;
-            animation: rotate 1s linear infinite;
-        }
-    }
+		svg {
+			width: 24px;
+			height: 24px;
+			animation: rotate 1s linear infinite;
+		}
+	}
 
-    &-right {
-        width: 40%;
-        height: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-flow: column;
+	&-right {
+		width: 40%;
+		height: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-flow: column;
 
-        &-pane {
-            width: 100%;
-            height: 100%;
-            flex: 0 1 auto;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            flex-flow: column;
-            gap: 8px;
-            padding-top: 27px;
+		&-pane {
+			width: 100%;
+			height: 100%;
+			flex: 0 1 auto;
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			flex-flow: column;
+			gap: 8px;
+			padding-top: 27px;
 
-            &>* {
-                width: 100%;
-            }
-        }
-    }
+			& > * {
+				width: 100%;
+			}
+		}
+	}
 
-    &-assignee {
-        width: 100%;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 8px;
-    }
+	&-assignee {
+		width: 100%;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 8px;
+	}
 }

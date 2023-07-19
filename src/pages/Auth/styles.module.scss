@@ -1,48 +1,48 @@
 .auth {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 36px;
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 36px;
 
-    &-logo {
-        position: absolute;
-        top: 0;
-        left: 0;
-        margin: 16px;
-        width: 96px;
-        height: 96px;
-        object-fit: cover;
-        cursor: pointer;
-        user-select: none;
-    }
+	&-logo {
+		position: absolute;
+		top: 0;
+		left: 0;
+		margin: 16px;
+		width: 96px;
+		height: 96px;
+		object-fit: cover;
+		cursor: pointer;
+		user-select: none;
+	}
 
-    &-heading {
-        max-width: 80vw;
-        text-align: center;
-    }
+	&-heading {
+		max-width: 80vw;
+		text-align: center;
+	}
 
-    &-form {
-        width: min(80vw, 500px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-flow: column;
-        gap: 24px;
+	&-form {
+		width: min(80vw, 500px);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-flow: column;
+		gap: 24px;
 
-        &-group {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
+		&-group {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 12px;
 
-            &>* {
-                width: 50%;
-            }
-        }
-    }
+			& > * {
+				width: 50%;
+			}
+		}
+	}
 }

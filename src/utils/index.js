@@ -14,10 +14,6 @@ export const sleep = (seconds) =>
 
 export const copy = (text) => navigator.clipboard.writeText(text);
 
-// The function to omit a particluar key from an object
-
-export const omit = (key, { [key]: _, ...rest }) => rest;
-
 // The function to produce random numbers between a range
 
 export const random = (min, max) =>

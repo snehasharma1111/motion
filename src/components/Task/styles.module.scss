@@ -1,54 +1,54 @@
-@import '../../sass/mixins';
+@import "../../sass/mixins";
 
 .task {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 12px;
-    padding: 12px;
-    border: 1px solid #afafaf;
-    border-radius: 6px;
-    overflow: visible;
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 12px;
+	padding: 12px;
+	border: 1px solid #afafaf;
+	border-radius: 6px;
+	overflow: visible;
 
-    &-header {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+	&-header {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 
-    &-actions {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
+	&-actions {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 8px;
 
-        &-btn {
-            @include init-button();
-            padding: 6px;
-            background-color: rgba(0, 0, 0, 0.05);
-            border-radius: 500px;
-        }
-    }
+		&-btn {
+			@include init-button();
+			padding: 6px;
+			background-color: rgba(0, 0, 0, 0.05);
+			border-radius: 500px;
+		}
+	}
 
-    &-body {
-        width: 100%;
-    }
+	&-body {
+		width: 100%;
+	}
 
-    &-footer {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+	&-footer {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 
-    &-assignee,
-    &-date {
-        height: 48px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-    }
+	&-assignee,
+	&-date {
+		height: 48px;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
 }
