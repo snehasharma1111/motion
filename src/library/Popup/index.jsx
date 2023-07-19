@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import { IoIosClose } from "react-icons/io";
 import { stylesConfig } from "../../utils";
@@ -20,11 +20,23 @@ const Popup = ({
 	const containerRef = useRef();
 	useOnClickOutside(containerRef, onClose);
 
+	useEffect(() => {
+		const handleKeyDown = (e) => {
+			if (e.key === "Escape") onClose();
+		};
+		document.addEventListener("keydown", handleKeyDown);
+		return () => document.removeEventListener("keydown", handleKeyDown);
+	}, []);
+
 	return (
 		<div className={classes("")}>
 			<div
 				className={classes("-container")}
-				style={{ width: width, height: height, ...styles.container }}
+				style={{
+					width: `min(95%, ${width})`,
+					height: `min(95%, ${height})`,
+					...styles.container,
+				}}
 				data-aos="zoom-in"
 				ref={containerRef}
 			>

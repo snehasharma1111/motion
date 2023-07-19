@@ -5,7 +5,12 @@ import EditTaskForm from "./edit";
 
 const TaskPopup = ({ category = "new", onSave, onClose }) => {
 	return (
-		<Popup onClose={onClose} title="Create Task" width="60%" height="80%">
+		<Popup
+			onClose={onClose}
+			title="Create Task"
+			width="800px"
+			height="480px"
+		>
 			{category === "new" ? (
 				<AddTaskForm onSave={onSave} />
 			) : (

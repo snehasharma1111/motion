@@ -145,6 +145,7 @@ const EditTaskForm = ({ id, onSave }) => {
 							type="date"
 							value={fields.dueDate}
 							onChange={handleChange}
+							style={{ width: "100%" }}
 						/>
 					</div>
 					<Button
