@@ -11,7 +11,7 @@ import { isAdmin } from "../middleware/roles.mjs";
 const router = Router();
 
 router.use(isAdmin);
-router.get("/", getAllTasks);
+router.post("/", getAllTasks);
 router.post("/", createTask);
 router.get("/:id", getTask);
 router.patch("/:id", updateTask);

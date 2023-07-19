@@ -12,7 +12,7 @@ import useOnClickOutside from "../../hooks/useOnClickOutside";
 
 const classes = stylesConfig(styles, "all-users");
 
-const AllUsers = ({ currentUser, setCurrentUser }) => {
+const AllUsers = ({ currentUser, setCurrentUser, isFilter = false }) => {
 	const { allUsers, setAllUsers } = useContext(GlobalContext);
 	const dropdownRef = useRef();
 
@@ -68,26 +68,41 @@ const AllUsers = ({ currentUser, setCurrentUser }) => {
 							<AiOutlineLoading3Quarters />
 						</div>
 					) : (
-						allUsers.map((user) => (
-							<div
-								className={classes("-user", "-dropdown-option")}
-								key={user._id}
-								onClick={() => {
-									setActiveUser(user);
-									setCurrentUser(user);
-									setShowDropdown(false);
-								}}
-							>
-								<Avatar
-									src={user.avatar}
-									alt={user.name}
-									size={24}
-								/>
-								<Typography type="body" variant="medium">
-									{user.name}
-								</Typography>
-							</div>
-						))
+						(isFilter
+							? [
+									{
+										_id: "",
+										avatar: "https://raw.githubusercontent.com/snehasharma1111/planner/master/src/images/user.svg",
+										name: "All Users",
+									},
+									// eslint-disable-next-line no-mixed-spaces-and-tabs
+							  ]
+							: []
+						)
+							.concat(allUsers)
+							.map((user) => (
+								<div
+									className={classes(
+										"-user",
+										"-dropdown-option"
+									)}
+									key={user._id}
+									onClick={() => {
+										setActiveUser(user);
+										setCurrentUser(user);
+										setShowDropdown(false);
+									}}
+								>
+									<Avatar
+										src={user.avatar}
+										alt={user.name}
+										size={24}
+									/>
+									<Typography type="body" variant="medium">
+										{user.name}
+									</Typography>
+								</div>
+							))
 					)}
 				</div>
 			) : null}

@@ -10,12 +10,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { login } from "../../utils/api/auth";
 import GlobalContext from "../../context/GlobalContext";
+import { USER_ROLES } from "../../constants/enum.mjs";
 
 const classes = stylesConfig(styles, "auth");
 
 const Login = () => {
 	const navigate = useNavigate();
-	const { setUser, loggedIn, setLoggedIn } = useContext(GlobalContext);
+	const { user, setUser, loggedIn, setLoggedIn } = useContext(GlobalContext);
 	const [loading, setLoading] = useState(false);
 	const [inputCred, setInputCred] = useState({
 		username: "",
@@ -38,7 +39,8 @@ const Login = () => {
 			setUser(res.user);
 			setLoggedIn(true);
 			localStorage.setItem("token", res.token);
-			navigate("/tasks");
+			if (res.user.role === USER_ROLES.ADMIN) navigate("/dashboard");
+			else navigate("/tasks");
 		} catch (error) {
 			console.error();
 			toast.error(error.message ?? "Something went wrong");
@@ -48,7 +50,10 @@ const Login = () => {
 	};
 
 	useEffect(() => {
-		if (loggedIn) navigate("/tasks");
+		if (loggedIn) {
+			if (user.role === USER_ROLES.ADMIN) navigate("/dashboard");
+			else navigate("/tasks");
+		}
 	}, [loggedIn]);
 
 	return (
@@ -59,7 +64,11 @@ const Login = () => {
 				className={classes("-logo")}
 				onClick={() => navigate("/")}
 			/>
-			<Typography type="heading" variant="display" className={classes("-heading")}>
+			<Typography
+				type="heading"
+				variant="display"
+				className={classes("-heading")}
+			>
 				Login to your Motion Account
 			</Typography>
 			<form className={classes("-form")} onSubmit={handleSubmit}>

@@ -1,0 +1,70 @@
+@import "../../sass/mixins";
+
+.dashboard {
+    width: 100vw;
+    position: relative;
+
+    &-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px;
+
+        &-user {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        &-logo {
+            width: 64px;
+            height: 64px;
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+
+    &-parameters {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px;
+
+        &-actions {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex: 0 1 auto;
+            gap: 16px;
+        }
+
+        &>* {
+            width: fit-content;
+        }
+    }
+
+    &-empty {
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-fab {
+        @include init-button();
+        position: fixed;
+        bottom: 16px;
+        right: 16px;
+        padding: 16px;
+        border-radius: 500px;
+        background-color: var(--color-brand-black);
+        color: var(--color-brand-white);
+        font-size: 24px;
+        box-shadow: var(--shadow-elevation-4dp);
+    }
+}

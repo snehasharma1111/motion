@@ -9,7 +9,13 @@ import useOnClickOutside from "../../hooks/useOnClickOutside";
 
 const classes = stylesConfig(styles, "status");
 
-const Status = ({ id, dropdown = false, onSelect, className = "" }) => {
+const Status = ({
+	id,
+	dropdown = false,
+	onSelect,
+	className = "",
+	isFilter = false,
+}) => {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const ref = useRef();
 
@@ -35,7 +41,7 @@ const Status = ({ id, dropdown = false, onSelect, className = "" }) => {
 				<circle cx="8" cy="8" r="16" fill="currentColor" />
 			</svg>
 			<Typography type="body" variant="medium">
-				{getStatusLabel(id)}
+				{getStatusLabel(id) ?? "None"}
 			</Typography>
 			{dropdown ? (
 				<>
@@ -47,20 +53,25 @@ const Status = ({ id, dropdown = false, onSelect, className = "" }) => {
 					/>
 					{showDropdown ? (
 						<div className={classes("-dropdown")} ref={ref}>
-							{Object.values(TASK_STATUS).map((status) => (
-								<div
-									className={classes("-option")}
-									key={status}
-									onClick={() => {
-										if (onSelect) onSelect(status);
-										setShowDropdown(false);
-									}}
-								>
-									<Typography type="body" variant="medium">
-										{getStatusLabel(status)}
-									</Typography>
-								</div>
-							))}
+							{(isFilter ? ["none"] : [])
+								.concat(Object.values(TASK_STATUS))
+								.map((status) => (
+									<div
+										className={classes("-option")}
+										key={status}
+										onClick={() => {
+											if (onSelect) onSelect(status);
+											setShowDropdown(false);
+										}}
+									>
+										<Typography
+											type="body"
+											variant="medium"
+										>
+											{getStatusLabel(status) ?? "None"}
+										</Typography>
+									</div>
+								))}
 						</div>
 					) : null}
 				</>

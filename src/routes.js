@@ -1,15 +1,20 @@
 import React from "react";
 import PrivateRoute from "./components/PrivateRoute";
-import Tasks from "./pages/Tasks";
 import Home from "./pages/Home";
 import Signup from "./pages/Auth/signup";
 import Login from "./pages/Auth/login";
+import Tasks from "./pages/Tasks";
+import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 
 const protectedRoutes = [
 	{
 		path: "/tasks",
 		component: <Tasks />,
+	},
+	{
+		path: "/dashboard",
+		component: <Dashboard />,
 	},
 ];
 

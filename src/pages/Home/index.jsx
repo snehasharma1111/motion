@@ -7,12 +7,13 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { homeHero } from "../../images";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/GlobalContext";
+import { USER_ROLES } from "../../constants/enum.mjs";
 
 const classes = stylesConfig(styles, "home");
 
 const Home = () => {
 	const navigate = useNavigate();
-	const { loggedIn } = useContext(GlobalContext);
+	const { user, loggedIn } = useContext(GlobalContext);
 
 	return (
 		<main className={classes("")}>
@@ -34,8 +35,11 @@ const Home = () => {
 				icon={<AiOutlineArrowRight />}
 				iconPosition="right"
 				onClick={() => {
-					if (loggedIn) navigate("/tasks");
-					navigate("/login");
+					if (loggedIn) {
+						if (user.role === USER_ROLES.ADMIN)
+							navigate("/dashboard");
+						else navigate("/tasks");
+					} else navigate("/login");
 				}}
 			>
 				Get Started Today

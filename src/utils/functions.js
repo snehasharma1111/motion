@@ -9,6 +9,17 @@ export const getStatusLabel = (status) => {
 		case TASK_STATUS.DONE:
 			return "Completed";
 		default:
-			return "";
+			return undefined;
 	}
+};
+
+// debounce function for delaying function calls
+export const debounce = (func, wait) => {
+	let timeout;
+	return (e) => {
+		clearTimeout(timeout);
+		timeout = setTimeout(() => {
+			func(e);
+		}, wait);
+	};
 };
