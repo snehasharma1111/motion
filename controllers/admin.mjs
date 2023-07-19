@@ -5,7 +5,16 @@ import { createUpdateTask } from "../validations/tasks.mjs";
 
 export const getAllTasks = async (req, res) => {
 	try {
-		const tasks = await Task.find()
+		const { text, status, user } = req.body;
+		const query = {};
+		if (text)
+			query.$or = [
+				{ title: { $regex: text, $options: "i" } },
+				{ description: { $regex: text, $options: "i" } },
+			];
+		if (status && status !== "none") query.status = status;
+		if (user) query.$or = [{ createdBy: user }, { assignee: user }];
+		const tasks = await Task.find(query)
 			.sort({
 				dueDate: -1,
 			})

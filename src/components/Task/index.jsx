@@ -109,7 +109,8 @@ const Task = (props) => {
 								);
 							}}
 						/>
-						{task.createdBy._id === user._id ? (
+						{task.createdBy._id === user._id ||
+						user.role === USER_ROLES.ADMIN ? (
 							<button
 								className={classes("-actions-btn")}
 								onClick={() =>
